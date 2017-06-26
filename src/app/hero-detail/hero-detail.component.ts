@@ -1,6 +1,6 @@
 import { Location } from '@angular/common'
 import { Component, Input, OnInit } from '@angular/core'
-import { ActivatedRoute, Params } from '@angular/router'
+import { ActivatedRoute, Params, Router } from '@angular/router'
 import 'rxjs/add/operator/switchMap'
 import { Hero } from '../hero'
 import { HeroService } from '../hero.service'
@@ -15,7 +15,8 @@ export class HeroDetailComponent implements OnInit {
 
   constructor(private heroService: HeroService,
               private route: ActivatedRoute,
-              private location: Location) {
+              private location: Location,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -32,5 +33,11 @@ export class HeroDetailComponent implements OnInit {
     this.heroService
       .update(this.hero)
       .then(() => this.goBack())
+  }
+
+  remove(): void {
+    this.heroService
+      .remove(this.hero)
+      .then(() => this.router.navigate(['/dashboard']))
   }
 }
