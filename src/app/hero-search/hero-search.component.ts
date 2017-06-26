@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import 'rxjs/add/observable/of'
+import 'rxjs/add/operator/catch'
 import 'rxjs/add/operator/debounceTime'
 import 'rxjs/add/operator/distinctUntilChanged'
 import { Observable } from 'rxjs/Observable'
@@ -26,6 +27,10 @@ export class HeroSearchComponent implements OnInit {
       .debounceTime(300)
       .distinctUntilChanged()
       .switchMap((term: string) => term ? this.heroSearchService.search(term) : Observable.of<Hero[]>([]))
+      .catch(error => {
+        console.log(error)
+        return Observable.of<Hero[]>([])
+      })
   }
 
   goDetail(hero: Hero): void {
