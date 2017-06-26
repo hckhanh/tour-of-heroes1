@@ -19,7 +19,14 @@ export class HeroService {
   getHeroes(): Promise<Hero[]> {
     return new Promise(resolve => {
       // Simulate server latency with 2 second delay
-      setTimeout(() => resolve(HEROES), 2000)
+      setTimeout(() => resolve(HEROES), 650)
+    })
+  }
+
+  getHero(id: number): Promise<Hero> {
+    return new Promise(resolve => {
+      // Simulate server latency with 2 second delay
+      setTimeout(() => resolve(HEROES.find(hero => hero.id === id)), 650)
     })
   }
 }
