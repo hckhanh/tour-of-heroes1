@@ -1,17 +1,21 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 import { FormsModule } from '@angular/forms'
+import { ActivatedRoute, Params } from '@angular/router'
 import { RouterTestingModule } from '@angular/router/testing'
+import { Observable } from 'rxjs/Observable'
+import { Hero } from '../hero'
 import { HeroService } from '../hero.service'
-import { HEROES_DATA } from '../mockup-data'
 import { HeroDetailComponent } from './hero-detail.component'
 import createSpy = jasmine.createSpy
 
+const HERO: Hero = { id: 11, name: 'Mr. Nice' }
+
+const params: Params = {
+  id: HERO.id
+}
+
 class HeroServiceStub {
-  getHero = createSpy('getHero').and.callFake(() =>
-    Promise
-      .resolve(true)
-      .then(() => Object.assign({}, HEROES_DATA[0]))
-  )
+  getHero = createSpy('getHero').and.callFake(() => Promise.resolve(Object.assign({}, HERO)))
 }
 
 describe('HeroDetailComponent', () => {
@@ -26,22 +30,24 @@ describe('HeroDetailComponent', () => {
           FormsModule
         ],
         providers: [
-          { provide: HeroService, useClass: HeroServiceStub }
+          { provide: HeroService, useClass: HeroServiceStub },
+          { provide: ActivatedRoute, useValue: { params: Observable.of(params) } }
         ]
       })
       .compileComponents()
   }))
 
-  beforeEach(() => {
+  beforeEach(async(() => {
     fixture = TestBed.createComponent(HeroDetailComponent)
     component = fixture.componentInstance
-    // component.hero = HEROES_DATA[0]
-    // const expectedHero = new Hero(42, 'Test Name')
-    // component.hero = expectedHero
     fixture.detectChanges()
-  })
+  }))
 
   it('should be created', () => {
     expect(component).toBeTruthy()
+  })
+
+  it('should load the hero with id = 11', () => {
+    expect(component.hero).toEqual(HERO)
   })
 })
