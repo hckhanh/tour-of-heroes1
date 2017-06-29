@@ -1,41 +1,40 @@
 import { fakeAsync, inject, TestBed } from '@angular/core/testing'
-import { HttpModule, RequestMethod, Response, ResponseOptions, XHRBackend } from '@angular/http'
-import { MockBackend, MockConnection } from '@angular/http/testing'
+import { BaseRequestOptions, ConnectionBackend, Http, RequestOptions, Response, ResponseOptions } from '@angular/http'
+import { MockBackend } from '@angular/http/testing'
 import { Hero } from './hero'
-
 import { HeroSearchService } from './hero-search.service'
 
 describe('HeroSearchService', () => {
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        HttpModule
-      ],
+    this.injector = TestBed.configureTestingModule({
       providers: [
-        HeroSearchService,
-        { provide: XHRBackend, useClass: MockBackend },
-        MockBackend
+        { provide: ConnectionBackend, useClass: MockBackend },
+        { provide: RequestOptions, useClass: BaseRequestOptions },
+        Http,
+        HeroSearchService
       ]
     })
+
+    this.backend = this.injector.get(ConnectionBackend) as MockBackend
+    this.backend.connections.subscribe((connection: any) => this.connection = connection)
   })
 
   it('should be created', fakeAsync(inject([HeroSearchService], (service: HeroSearchService) => {
     expect(service).toBeTruthy()
   })))
 
-  it('#search should search heroes by name', fakeAsync(inject(
-    [MockBackend, HeroSearchService],
-    (backend: MockBackend, service: HeroSearchService) => {
-      backend.connections.subscribe((connection: MockConnection) => {
-        expect(connection.request.method).toBe(RequestMethod.Post)
+  it('#search should search heroes by name', fakeAsync(inject([HeroSearchService], (service: HeroSearchService) => {
+    let result = null
 
-        connection.mockRespond(new Response(
-          new ResponseOptions({ body: [] })
-        ))
-      })
+    service
+      .search('A')
+      .subscribe((heroes: Hero[]) => result = heroes)
 
-      service
-        .search('A')
-        .subscribe((heroes: Hero[]) => expect(heroes).toBeNull())
-    })))
+    this.connection.mockRespond(new Response(
+      new ResponseOptions({ body: JSON.stringify({ data: [] }) })
+    ))
+
+    expect(this.connection.request.url).toMatch(/api\/heroes\?name=A$/)
+    expect(result).toEqual([])
+  })))
 })
