@@ -5,6 +5,9 @@ import { Hero } from './hero'
 import { HeroSearchService } from './hero-search.service'
 
 describe('HeroSearchService', () => {
+  let backend: MockBackend
+  let connection: any
+
   beforeEach(() => {
     this.injector = TestBed.configureTestingModule({
       providers: [
@@ -15,8 +18,8 @@ describe('HeroSearchService', () => {
       ]
     })
 
-    this.backend = this.injector.get(ConnectionBackend) as MockBackend
-    this.backend.connections.subscribe((connection: any) => this.connection = connection)
+    backend = this.injector.get(ConnectionBackend) as MockBackend
+    backend.connections.subscribe((con: any) => connection = con)
   })
 
   it('should be created', fakeAsync(inject([HeroSearchService], (service: HeroSearchService) => {
@@ -30,11 +33,11 @@ describe('HeroSearchService', () => {
       .search('A')
       .subscribe((heroes: Hero[]) => result = heroes)
 
-    this.connection.mockRespond(new Response(
+    connection.mockRespond(new Response(
       new ResponseOptions({ body: JSON.stringify({ data: [] }) })
     ))
 
-    expect(this.connection.request.url).toMatch(/api\/heroes\?name=A$/)
+    expect(connection.request.url).toMatch(/api\/heroes\?name=A$/)
     expect(result).toEqual([])
   })))
 })
