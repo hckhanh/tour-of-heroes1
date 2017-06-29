@@ -27,7 +27,7 @@ describe('HeroService', () => {
       .then(heroes => expect(heroes).toEqual(HEROES_DATA))
   })))
 
-  it('#getHeroes get a hero (id: 20) existed in database', async(inject([HeroService], (service: HeroService) => {
+  it('#getHeroes get a hero (id: 20) in database', async(inject([HeroService], (service: HeroService) => {
     const expectedHero = HEROES_DATA.find((hero: Hero) => hero.id === 20)
     service
       .getHero(20)
