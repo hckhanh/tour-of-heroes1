@@ -29,10 +29,14 @@ describe('HeroDetailComponent', () => {
           RouterTestingModule,
           FormsModule
         ],
-        providers: [
-          { provide: HeroService, useClass: HeroServiceStub },
-          { provide: ActivatedRoute, useValue: { params: Observable.of(params) } }
-        ]
+      })
+      .overrideComponent(HeroDetailComponent, {
+        set: {
+          providers: [
+            { provide: HeroService, useClass: HeroServiceStub },
+            { provide: ActivatedRoute, useValue: { params: Observable.of(params) } }
+          ]
+        }
       })
       .compileComponents()
   }))
