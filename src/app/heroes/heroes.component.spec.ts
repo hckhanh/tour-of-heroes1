@@ -5,6 +5,7 @@ import { HeroServiceStub } from '../hero-service.stub'
 import { HeroService } from '../hero.service'
 import { HEROES_DATA } from '../mockup-data'
 import { HeroesComponent } from './heroes.component'
+import { createCustomEvent } from '../utils.spec'
 
 describe('HeroesComponent', () => {
   let component: HeroesComponent
@@ -43,7 +44,7 @@ describe('HeroesComponent', () => {
     const inputElement = fixture.debugElement.query(By.css('.add-hero-input')).nativeElement
 
     inputElement.value = 'Invoker'
-    inputElement.dispatchEvent(new Event('input'))
+    inputElement.dispatchEvent(createCustomEvent('input'))
     fixture.nativeElement.querySelector('button').click()
 
     tick(300)

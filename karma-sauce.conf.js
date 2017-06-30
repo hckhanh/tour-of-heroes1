@@ -1,3 +1,5 @@
+// Karma configuration file
+
 if (!process.env.SAUCE_USERNAME || !process.env.SAUCE_ACCESS_KEY) {
   console.error('Make sure the SAUCE_USERNAME and SAUCE_ACCESS_KEY environment variables are set.')
   process.exit(1)
@@ -96,6 +98,6 @@ module.exports = function(config) {
     },
     customLaunchers: customLaunchers,
     browsers: Object.keys(customLaunchers),
-    singleRun: true
+    singleRun: true // only need to run 1 time on SauceLabs
   })
 }

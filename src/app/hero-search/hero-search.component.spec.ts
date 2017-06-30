@@ -5,6 +5,7 @@ import { RouterTestingModule } from '@angular/router/testing'
 import { HeroSearchServiceStub } from '../hero-search-service.stub'
 import { HeroSearchService } from '../hero-search.service'
 import { HEROES_DATA } from '../mockup-data'
+import { createCustomEvent } from '../utils.spec'
 import { HeroSearchComponent } from './hero-search.component'
 
 describe('HeroSearchComponent', () => {
@@ -45,8 +46,8 @@ describe('HeroSearchComponent', () => {
     const inputElement = fixture.nativeElement.querySelector('input')
 
     inputElement.value = 'A'
-    inputElement.dispatchEvent(new Event('input'))
-    inputElement.dispatchEvent(new Event('keyup'))
+    inputElement.dispatchEvent(createCustomEvent('input'))
+    inputElement.dispatchEvent(createCustomEvent('keyup'))
 
     tick(300)
     fixture.detectChanges()
