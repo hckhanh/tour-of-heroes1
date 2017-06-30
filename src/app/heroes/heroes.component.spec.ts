@@ -44,14 +44,12 @@ describe('HeroesComponent', () => {
 
     inputElement.value = 'Invoker'
     inputElement.dispatchEvent(new Event('input'))
-
-    // fixture.nativeElement.querySelector('button').click()
-    fixture.debugElement.nativeElement.querySelector('button').click()
+    fixture.nativeElement.querySelector('button').click()
 
     tick(300)
     fixture.detectChanges()
 
     expect(component.heroes.length).toEqual(HEROES_DATA.length + 1)
-    expect(fixture.debugElement.nativeElement.querySelector('ul').childElementCount).toBe(HEROES_DATA.length + 1)
+    expect(fixture.nativeElement.querySelector('ul').childElementCount).toBe(HEROES_DATA.length + 1)
   }))
 })
