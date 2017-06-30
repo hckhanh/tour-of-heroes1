@@ -60,7 +60,7 @@ module.exports = function(config) {
   // Safari
   customLaunchers.sl_safari_8_Mac_10 = createCustomLauncher('safari', '8', 'Mac 10.10')
   customLaunchers.sl_safari_9_Mac_11 = createCustomLauncher('safari', '9', 'Mac 10.11')
-  customLaunchers.sl_safari_9_Mac_11 = createCustomLauncher('safari', '10', 'Mac 10.11')
+  customLaunchers.sl_safari_10_Mac_11 = createCustomLauncher('safari', '10', 'Mac 10.11')
   customLaunchers.sl_safari_10_Mac_12 = createCustomLauncher('safari', '10', 'Mac 10.12')
 
   // IE
@@ -70,9 +70,9 @@ module.exports = function(config) {
   customLaunchers.sl_ie_11_Windows_10 = createCustomLauncher('internet explorer', '11', 'Windows 10')
 
   // Edge
-  customLaunchers.sl_edge = createCustomLauncher('microsoftedge', '13')
-  customLaunchers.sl_edge = createCustomLauncher('microsoftedge', '14')
-  customLaunchers.sl_edge = createCustomLauncher('microsoftedge', '15')
+  customLaunchers.sl_edge_13 = createCustomLauncher('microsoftedge', '13')
+  customLaunchers.sl_edge_14 = createCustomLauncher('microsoftedge', '14')
+  customLaunchers.sl_edge_15 = createCustomLauncher('microsoftedge', '15')
 
   config.set({
     basePath: '',
