@@ -1,6 +1,12 @@
 # TourOfHeroes
 
+[![Build Status](https://travis-ci.org/hckhanh/tour-of-heroes.svg?branch=master)](https://travis-ci.org/hckhanh/tour-of-heroes)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.1.3.
+
+## Browser support
+
+[![Build Status](https://saucelabs.com/browser-matrix/khanhhc.svg)](https://saucelabs.com/beta/builds/99dad3927b154915a7e98e3e6ad460d3)
 
 ## Development server
 
