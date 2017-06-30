@@ -4,6 +4,7 @@ import { By } from '@angular/platform-browser'
 import { RouterTestingModule } from '@angular/router/testing'
 import { HeroSearchServiceStub } from '../hero-search-service.stub'
 import { HeroSearchService } from '../hero-search.service'
+import { HEROES_DATA } from '../mockup-data'
 import { HeroSearchComponent } from './hero-search.component'
 
 describe('HeroSearchComponent', () => {
@@ -51,6 +52,7 @@ describe('HeroSearchComponent', () => {
     fixture.detectChanges()
 
     expect(service.search).toHaveBeenCalled()
-    expect(fixture.debugElement.queryAll(By.css('.search-result')).length).toBe(2)
+    expect(fixture.debugElement.queryAll(By.css('.search-result')).length)
+      .toBe(HEROES_DATA.filter(hero => hero.name.search(/A/i) !== -1).length)
   }))
 })

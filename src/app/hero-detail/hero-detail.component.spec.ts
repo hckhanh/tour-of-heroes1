@@ -3,19 +3,14 @@ import { FormsModule } from '@angular/forms'
 import { ActivatedRoute, Params } from '@angular/router'
 import { RouterTestingModule } from '@angular/router/testing'
 import { Observable } from 'rxjs/Observable'
-import { Hero } from '../hero'
+import { HeroServiceStub } from '../hero-service.stub'
 import { HeroService } from '../hero.service'
+import { HEROES_DATA } from '../mockup-data'
 import { HeroDetailComponent } from './hero-detail.component'
 import createSpy = jasmine.createSpy
 
-const HERO: Hero = { id: 11, name: 'Mr. Nice' }
-
 const params: Params = {
-  id: HERO.id
-}
-
-class HeroServiceStub {
-  getHero = createSpy('getHero').and.callFake(() => Promise.resolve(Object.assign({}, HERO)))
+  id: HEROES_DATA[0].id
 }
 
 describe('HeroDetailComponent', () => {
@@ -28,7 +23,7 @@ describe('HeroDetailComponent', () => {
         imports: [
           RouterTestingModule,
           FormsModule
-        ],
+        ]
       })
       .overrideComponent(HeroDetailComponent, {
         set: {
@@ -52,6 +47,6 @@ describe('HeroDetailComponent', () => {
   })
 
   it('should load the hero with id = 11', () => {
-    expect(component.hero).toEqual(HERO)
+    expect(component.hero).toEqual(HEROES_DATA[0])
   })
 })
