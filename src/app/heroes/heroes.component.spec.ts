@@ -1,4 +1,5 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing'
+import { By } from '@angular/platform-browser'
 import { RouterTestingModule } from '@angular/router/testing'
 import { HeroServiceStub } from '../hero-service.stub'
 import { HeroService } from '../hero.service'
@@ -37,4 +38,20 @@ describe('HeroesComponent', () => {
   it('should show the list of heroes', () => {
     expect(component.heroes).toEqual(HEROES_DATA)
   })
+
+  it('should add a new hero the list of heroes', fakeAsync(() => {
+    const inputElement = fixture.debugElement.query(By.css('.add-hero-input')).nativeElement
+
+    inputElement.value = 'Invoker'
+    inputElement.dispatchEvent(new Event('input'))
+
+    // fixture.nativeElement.querySelector('button').click()
+    fixture.debugElement.nativeElement.querySelector('button').click()
+
+    tick(300)
+    fixture.detectChanges()
+
+    expect(component.heroes.length).toEqual(HEROES_DATA.length + 1)
+    expect(fixture.debugElement.nativeElement.querySelector('ul').childElementCount).toBe(HEROES_DATA.length + 1)
+  }))
 })
