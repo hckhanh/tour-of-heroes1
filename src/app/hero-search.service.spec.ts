@@ -1,43 +1,41 @@
-import { fakeAsync, inject, TestBed } from '@angular/core/testing'
-import { BaseRequestOptions, ConnectionBackend, Http, RequestOptions, Response, ResponseOptions } from '@angular/http'
-import { MockBackend } from '@angular/http/testing'
+import { async, TestBed } from '@angular/core/testing'
+import { HttpModule } from '@angular/http'
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api'
 import { Hero } from './hero'
 import { HeroSearchService } from './hero-search.service'
+import { InMemoryDataService } from './in-memory-data.service'
+import { HEROES_DATA } from './mockup-data'
 
 describe('HeroSearchService', () => {
-  let backend: MockBackend
-  let connection: any
+  let service: HeroSearchService
 
   beforeEach(() => {
-    this.injector = TestBed.configureTestingModule({
-      providers: [
-        { provide: ConnectionBackend, useClass: MockBackend },
-        { provide: RequestOptions, useClass: BaseRequestOptions },
-        Http,
-        HeroSearchService
-      ]
+    const injector = TestBed.configureTestingModule({
+      imports: [
+        HttpModule,
+        InMemoryWebApiModule.forRoot(InMemoryDataService)
+      ],
+      providers: [HeroSearchService]
     })
 
-    backend = this.injector.get(ConnectionBackend) as MockBackend
-    backend.connections.subscribe((con: any) => connection = con)
+    service = injector.get(HeroSearchService)
   })
 
-  it('should be created', fakeAsync(inject([HeroSearchService], (service: HeroSearchService) => {
+  it('should be created', async(() => {
     expect(service).toBeTruthy()
-  })))
+  }))
 
-  it('#search should search heroes by name', fakeAsync(inject([HeroSearchService], (service: HeroSearchService) => {
-    let result = null
+  it(`#search should return result of heroes with name 'A'`, async(() => {
+    const searchResults = HEROES_DATA.filter(hero => hero.name.match(/A/i))
 
     service
       .search('A')
-      .subscribe((heroes: Hero[]) => result = heroes)
+      .subscribe((heroes: Hero[]) => expect(heroes).toEqual(searchResults))
+  }))
 
-    connection.mockRespond(new Response(
-      new ResponseOptions({ body: JSON.stringify({ data: [] }) })
-    ))
-
-    expect(connection.request.url).toMatch(/api\/heroes\?name=A$/)
-    expect(result).toEqual([])
-  })))
+  it(`#search should return empty result of heroes with name 'W'`, async(() => {
+    service
+      .search('W')
+      .subscribe((heroes: Hero[]) => expect(heroes).toEqual([]))
+  }))
 })
