@@ -6,14 +6,8 @@ if (!process.env.SAUCE_USERNAME || !process.env.SAUCE_ACCESS_KEY) {
 }
 
 const BROWSERS = {
-  chrome: [
-    '58',
-    // '59'
-  ],
-  firefox: [
-    '53',
-    // '54'
-  ]
+  chrome: [null],
+  firefox: [null]
 }
 
 const PLATFORMS = {
