@@ -94,7 +94,7 @@ module.exports = function(config) {
     reporters: ['dots', 'saucelabs'],
     autoWatch: false,
     sauceLabs: {
-      testName: 'Karma Test',
+      testName: 'tour-of-heroes',
       public: 'public'
     },
     customLaunchers: customLaunchers,
