@@ -40,7 +40,7 @@ describe('HeroesComponent', () => {
     expect(component.heroes).toEqual(HEROES_DATA)
   })
 
-  it('should add a new hero the list of heroes', fakeAsync(() => {
+  it('should add a new hero to the list of heroes', fakeAsync(() => {
     const inputElement = fixture.debugElement.query(By.css('.add-hero-input')).nativeElement
 
     inputElement.value = 'Invoker'

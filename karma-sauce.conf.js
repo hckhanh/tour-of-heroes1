@@ -66,8 +66,9 @@ module.exports = function(config) {
   customLaunchers.sl_safari_10_Mac_12 = createCustomLauncher('safari', '10', 'Mac 10.12')
 
   // IE
-  customLaunchers.sl_ie_9 = createCustomLauncher('internet explorer', '9', 'Windows 7')
-  customLaunchers.sl_ie_10 = createCustomLauncher('internet explorer', '10', 'Windows 8')
+  // customLaunchers.sl_ie_9 = createCustomLauncher('internet explorer', '9', 'Windows 7')
+  customLaunchers.sl_ie_10_Windows_7 = createCustomLauncher('internet explorer', '10', 'Windows 7')
+  customLaunchers.sl_ie_10_Windows_8 = createCustomLauncher('internet explorer', '10', 'Windows 8')
   customLaunchers.sl_ie_11_Windows_81 = createCustomLauncher('internet explorer', '11', 'Windows 8.1')
   customLaunchers.sl_ie_11_Windows_10 = createCustomLauncher('internet explorer', '11', 'Windows 10')
 
