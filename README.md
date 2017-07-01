@@ -1,4 +1,4 @@
-# TourOfHeroes
+# Tour of Heroes
 
 [![Build Status](https://travis-ci.org/hckhanh/tour-of-heroes.svg?branch=master)](https://travis-ci.org/hckhanh/tour-of-heroes)
 
