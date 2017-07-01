@@ -6,15 +6,23 @@ if (!process.env.SAUCE_USERNAME || !process.env.SAUCE_ACCESS_KEY) {
 }
 
 const BROWSERS = {
-  chrome: [null],
-  firefox: [null]
+  chrome: [
+    '57',
+    '58',
+    '57'
+  ],
+  firefox: [
+    '52',
+    '53',
+    '54'
+  ]
 }
 
 const PLATFORMS = {
   Windows: [
     '7',
-    '8',
-    '8.1',
+    // '8',
+    // '8.1',
     '10'
   ],
   Mac: [
@@ -60,16 +68,16 @@ module.exports = function(config) {
   const customLaunchers = combineBrowsersWithPlatforms()
 
   // Safari
-  customLaunchers.sl_safari_8_Mac_10 = createCustomLauncher('safari', '8', 'Mac 10.10')
+  // customLaunchers.sl_safari_8_Mac_10 = createCustomLauncher('safari', '8', 'Mac 10.10')
   customLaunchers.sl_safari_9_Mac_11 = createCustomLauncher('safari', '9', 'Mac 10.11')
-  customLaunchers.sl_safari_10_Mac_11 = createCustomLauncher('safari', '10', 'Mac 10.11')
+  // customLaunchers.sl_safari_10_Mac_11 = createCustomLauncher('safari', '10', 'Mac 10.11')
   customLaunchers.sl_safari_10_Mac_12 = createCustomLauncher('safari', '10', 'Mac 10.12')
 
   // IE
   // customLaunchers.sl_ie_9 = createCustomLauncher('internet explorer', '9', 'Windows 7')
   customLaunchers.sl_ie_10_Windows_7 = createCustomLauncher('internet explorer', '10', 'Windows 7')
-  customLaunchers.sl_ie_10_Windows_8 = createCustomLauncher('internet explorer', '10', 'Windows 8')
-  customLaunchers.sl_ie_11_Windows_81 = createCustomLauncher('internet explorer', '11', 'Windows 8.1')
+  // customLaunchers.sl_ie_10_Windows_8 = createCustomLauncher('internet explorer', '10', 'Windows 8')
+  // customLaunchers.sl_ie_11_Windows_81 = createCustomLauncher('internet explorer', '11', 'Windows 8.1')
   customLaunchers.sl_ie_11_Windows_10 = createCustomLauncher('internet explorer', '11', 'Windows 10')
 
   // Edge
