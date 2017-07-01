@@ -8,11 +8,11 @@ if (!process.env.SAUCE_USERNAME || !process.env.SAUCE_ACCESS_KEY) {
 const BROWSERS = {
   chrome: [
     '58',
-    '59'
+    // '59'
   ],
   firefox: [
     '53',
-    '54'
+    // '54'
   ]
 }
 
@@ -26,7 +26,7 @@ const PLATFORMS = {
   Mac: [
     '10.9',
     '10.10',
-    '10.11',
+    // '10.11',
     '10.12'
   ],
   Linux: [null]
