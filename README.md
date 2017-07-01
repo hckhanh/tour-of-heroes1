@@ -6,7 +6,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Browser support
 
-[![Build Status](https://saucelabs.com/browser-matrix/khanhhc.svg)](https://saucelabs.com/beta/builds/99dad3927b154915a7e98e3e6ad460d3)
+[![Build Status](https://saucelabs.com/browser-matrix/khanhhc.svg)](https://saucelabs.com/u/khanhhc)
 
 ## Development server
 
