@@ -7,12 +7,10 @@ if (!process.env.SAUCE_USERNAME || !process.env.SAUCE_ACCESS_KEY) {
 
 const BROWSERS = {
   chrome: [
-    '57',
     '58',
-    '57'
+    '59'
   ],
   firefox: [
-    '52',
     '53',
     '54'
   ]
