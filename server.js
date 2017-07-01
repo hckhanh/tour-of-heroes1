@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const compression = require('compression')
+const path = require('path')
 
 // If an incoming request uses
 // a protocol other than HTTPS,
