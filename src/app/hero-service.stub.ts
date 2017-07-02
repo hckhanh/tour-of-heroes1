@@ -1,19 +1,29 @@
 import createSpy = jasmine.createSpy
+import { Hero } from './hero'
 import { HEROES_DATA } from './mockup-data'
 
-const HEROES_SERVICE_DATA = HEROES_DATA.slice()
-
 export class HeroServiceStub {
+  private heroes: Hero[]
+
   getHero = createSpy('getHero').and.callFake(() =>
-    Promise.resolve(Object.assign({}, HEROES_SERVICE_DATA[0]))
+    Promise.resolve(Object.assign({}, this.heroes[0]))
   )
 
   getHeroes = createSpy('getHeroes').and.callFake(() =>
-    Promise.resolve(HEROES_SERVICE_DATA.slice())
+    Promise.resolve(this.heroes.slice())
   )
 
   create = createSpy('create').and.callFake((name: string) => {
-    HEROES_SERVICE_DATA.push({ id: 100, name })
-    return Promise.resolve(HEROES_SERVICE_DATA)
+    this.heroes.push({ id: 100, name })
+    return Promise.resolve(this.heroes)
   })
+
+  remove = createSpy('remove').and.callFake((hero: Hero) => {
+    this.heroes = this.heroes.filter(h => h.id !== hero.id)
+    return Promise.resolve(this.heroes)
+  })
+
+  constructor() {
+    this.heroes = [...HEROES_DATA]
+  }
 }
