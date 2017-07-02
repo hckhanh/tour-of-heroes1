@@ -1,8 +1,8 @@
 import { Component } from '@angular/core'
 import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 import { RouterTestingModule } from '@angular/router/testing'
-import { HeroServiceStub } from '../hero-service.stub'
 import { HeroService } from '../hero.service'
+import { HeroServiceStub } from '../hero.service.stub'
 import { HEROES_DATA } from '../mockup-data'
 import { HeroesDashboardComponent } from './heroes-dashboard.component'
 

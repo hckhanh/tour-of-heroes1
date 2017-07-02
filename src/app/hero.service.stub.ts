@@ -14,13 +14,18 @@ export class HeroServiceStub {
   )
 
   create = createSpy('create').and.callFake((name: string) => {
-    this.heroes.push({ id: 100, name })
+    this.heroes = [...this.heroes, { id: 100, name }]
     return Promise.resolve(this.heroes)
+  })
+
+  update = createSpy('update').and.callFake((hero: Hero) => {
+    this.heroes[0] = Object.assign({}, hero)
+    return Promise.resolve(this.heroes[0])
   })
 
   remove = createSpy('remove').and.callFake((hero: Hero) => {
     this.heroes = this.heroes.filter(h => h.id !== hero.id)
-    return Promise.resolve(this.heroes)
+    return Promise.resolve()
   })
 
   constructor() {
