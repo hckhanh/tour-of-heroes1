@@ -1,4 +1,4 @@
-// Karma configuration file
+// Karma configuration file for SauceLabs
 
 if (!process.env.SAUCE_USERNAME || !process.env.SAUCE_ACCESS_KEY) {
   console.error('Make sure the SAUCE_USERNAME and SAUCE_ACCESS_KEY environment variables are set.')

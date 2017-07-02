@@ -4,12 +4,13 @@ import { RouterTestingModule } from '@angular/router/testing'
 import { HeroServiceStub } from '../hero-service.stub'
 import { HeroService } from '../hero.service'
 import { HEROES_DATA } from '../mockup-data'
-import { HeroesComponent } from './heroes.component'
 import { createCustomEvent } from '../utils.spec'
+import { HeroesComponent } from './heroes.component'
 
 describe('HeroesComponent', () => {
   let component: HeroesComponent
   let fixture: ComponentFixture<HeroesComponent>
+  let service: any
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -29,6 +30,7 @@ describe('HeroesComponent', () => {
   beforeEach(async(() => {
     fixture = TestBed.createComponent(HeroesComponent)
     component = fixture.componentInstance
+    service = fixture.debugElement.injector.get(HeroService)
     fixture.detectChanges()
   }))
 
@@ -50,7 +52,32 @@ describe('HeroesComponent', () => {
     tick(300)
     fixture.detectChanges()
 
+    expect(service.create).toHaveBeenCalled()
     expect(component.heroes.length).toEqual(HEROES_DATA.length + 1)
     expect(fixture.nativeElement.querySelector('ul').childElementCount).toBe(HEROES_DATA.length + 1)
+  }))
+
+  it('should show the selected hero on list of heroes', () => {
+    fixture.detectChanges()
+
+    const firstElement = fixture.nativeElement.querySelector('ul').children[0]
+    firstElement.click()
+
+    expect(component.selectedHero).toEqual(HEROES_DATA[0])
+  })
+
+  it('should delete first hero on list of heroes', fakeAsync(() => {
+    fixture.detectChanges()
+
+    const firstElement = fixture.nativeElement.querySelector('ul').children[0]
+    const deleteButtonElement = firstElement.getElementsByClassName('delete')[0]
+
+    deleteButtonElement.click()
+
+    tick(300)
+    fixture.detectChanges()
+
+    expect(service.remove).toHaveBeenCalled()
+    expect(component.heroes.length).toBe(HEROES_DATA.length - 1)
   }))
 })
