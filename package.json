@@ -12,12 +12,12 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "heroku-postbuild": "ng build --aot -prod"
+    "heroku-postbuild": "ng build --prod --extract-licenses"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "^4.0.0",
-    "@angular/cli": "1.1.3",
+    "@angular/cli": "1.2.0",
     "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",
     "@angular/compiler-cli": "^4.0.0",
@@ -36,6 +36,7 @@
   },
   "devDependencies": {
     "@types/jasmine": "2.5.45",
+    "@types/jasminewd2": "^2.0.2",
     "@types/node": "~6.0.60",
     "codelyzer": "~3.0.1",
     "jasmine-core": "~2.6.2",
